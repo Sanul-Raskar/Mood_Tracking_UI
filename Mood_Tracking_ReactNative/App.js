@@ -72,6 +72,7 @@ const App = () => {
   const [state, updateState] = useState(data[2]);
 
   const opacity = useState(new Animated.Value(1))[0];
+  const transformAnimate = useState(new Animated.Value(1))[0];
 
   const [activeCounter, updateCounter] = useState(2);
 
@@ -87,10 +88,27 @@ const App = () => {
     opacity.setValue(0);
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 500,
+      duration: 400,
       useNativeDriver: false,
       easing: Easing.linear,
     }).start();
+    scaleAnimation();
+  };
+
+  const scaleAnimation = () => {
+    Animated.timing(transformAnimate, {
+      toValue: 0.98,
+      timing: 200,
+      useNativeDriver: true,
+      easing: Easing.cubic,
+    }).start(() => {
+      Animated.timing(transformAnimate, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+        easing: Easing.cubic,
+      }).start();
+    });
   };
 
   return (
@@ -104,7 +122,7 @@ const App = () => {
                 fontSize: 22,
                 color: 'gray',
                 marginTop: 34,
-                marginLeft: 14,
+                marginLeft: 16,
               }}>
               Hey Sanul
             </Text>
@@ -112,9 +130,10 @@ const App = () => {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginRight: 14,
+                marginRight: 16,
+                marginBottom:4
               }}>
-              <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 14}}>
+              <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 16}}>
                 How're you feeling?
               </Text>
               <Image
@@ -125,7 +144,7 @@ const App = () => {
                 }}
               />
             </View>
-            <View style={styles.card}>
+            <Animated.View style={[styles.card, {transform: [{scale: transformAnimate}]}]}>
               <LinearGradient
                 colors={state.moodBackground}
                 style={styles.linearGradient}>
@@ -302,6 +321,7 @@ const App = () => {
                   </View>
                 </View>
               </LinearGradient>
+              
               <View
                 style={{
                   backgroundColor: state.bottomStrip,
@@ -332,7 +352,8 @@ const App = () => {
                       marginRight: 26,
                       paddingVertical: 8,
                       borderRadius: 12,
-                    }}>
+                    }}
+                    onPress={() => scaleAnimation()}>
                     <Text
                       style={{
                         textAlign: 'center',
@@ -345,7 +366,7 @@ const App = () => {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            </Animated.View>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -364,7 +385,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     height: 380,
     borderRadius: 12,
-    marginHorizontal: 14,
+    marginHorizontal: 16,
     overflow: 'hidden',
   },
   linearGradient: {
