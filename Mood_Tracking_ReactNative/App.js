@@ -102,16 +102,29 @@ const App = () => {
             <Text
               style={{
                 fontSize: 22,
-                fontWeight: 'bold',
                 color: 'gray',
                 marginTop: 34,
                 marginLeft: 14,
               }}>
               Hey Sanul
             </Text>
-            <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 14}}>
-              How are you feeling?
-            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginRight: 14,
+              }}>
+              <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 14}}>
+                How're you feeling?
+              </Text>
+              <Image
+                style={{width: 50, height: 50, borderRadius: 50 / 2}}
+                source={{
+                  uri:
+                    'https://avatars1.githubusercontent.com/u/19240647?s=460&u=4149d5117d3c4fc2bfa3fe70c3d1525c2f9e2635&v=4',
+                }}
+              />
+            </View>
             <View style={styles.card}>
               <LinearGradient
                 colors={state.moodBackground}
@@ -362,11 +375,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  sliderButton1: {},
-  sliderButton2: {},
-  sliderButton3: {},
-  sliderButton4: {},
-  sliderButton5: {},
 });
 
 export default App;
