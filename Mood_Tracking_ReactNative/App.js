@@ -73,12 +73,15 @@ const App = () => {
 
   const opacity = useState(new Animated.Value(1))[0];
 
+  const [activeCounter, updateCounter] = useState(2);
+
   const size = opacity.interpolate({
     inputRange: [0, 1],
     outputRange: [200, 160],
   });
 
   const moodSelected = i => {
+    updateCounter(i);
     updateState(data[i]);
 
     opacity.setValue(0);
@@ -131,7 +134,7 @@ const App = () => {
                     opacity,
                     width: size,
                     height: size,
-                    marginBottom: 60,
+                    marginBottom: 76,
                     marginTop: -44,
                   }}
                   source={state.moodEmoji}
@@ -161,9 +164,24 @@ const App = () => {
                         borderRadius: 14 / 2,
                         marginLeft: 0,
                         marginTop: -4,
+                        zIndex: 10,
                       }}
-                      onPress={() => moodSelected(0)}
-                    />
+                      onPress={() => moodSelected(0)}>
+                      {activeCounter == 0 && (
+                        <View
+                          style={{
+                            backgroundColor: 'white',
+                            width: 40,
+                            height: 40,
+                            borderRadius: 40 / 2,
+                            marginLeft: -12,
+                            marginTop: -14,
+                            borderWidth: 4,
+                            borderColor: state.bottomStrip,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <TouchableOpacity
                       style={{
                         backgroundColor: state.sliderButton,
@@ -172,9 +190,24 @@ const App = () => {
                         borderRadius: 18 / 2,
                         marginLeft: 10,
                         marginTop: -6,
+                        zIndex: 10,
                       }}
-                      onPress={() => moodSelected(1)}
-                    />
+                      onPress={() => moodSelected(1)}>
+                      {activeCounter == 1 && (
+                        <View
+                          style={{
+                            backgroundColor: 'white',
+                            width: 40,
+                            height: 40,
+                            borderRadius: 40 / 2,
+                            marginLeft: -10,
+                            marginTop: -10,
+                            borderWidth: 4,
+                            borderColor: state.bottomStrip,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <TouchableOpacity
                       style={{
                         backgroundColor: state.sliderButton,
@@ -183,9 +216,24 @@ const App = () => {
                         borderRadius: 22 / 2,
                         marginLeft: 10,
                         marginTop: -8,
+                        zIndex: 10,
                       }}
-                      onPress={() => moodSelected(2)}
-                    />
+                      onPress={() => moodSelected(2)}>
+                      {activeCounter == 2 && (
+                        <View
+                          style={{
+                            backgroundColor: 'white',
+                            width: 40,
+                            height: 40,
+                            borderRadius: 40 / 2,
+                            marginLeft: -8,
+                            marginTop: -8,
+                            borderWidth: 4,
+                            borderColor: state.bottomStrip,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <TouchableOpacity
                       style={{
                         backgroundColor: state.sliderButton,
@@ -194,9 +242,24 @@ const App = () => {
                         borderRadius: 26 / 2,
                         marginLeft: 10,
                         marginTop: -10,
+                        zIndex: 10,
                       }}
-                      onPress={() => moodSelected(3)}
-                    />
+                      onPress={() => moodSelected(3)}>
+                      {activeCounter == 3 && (
+                        <View
+                          style={{
+                            backgroundColor: 'white',
+                            width: 40,
+                            height: 40,
+                            borderRadius: 40 / 2,
+                            marginLeft: -8,
+                            marginTop: -7,
+                            borderWidth: 4,
+                            borderColor: state.bottomStrip,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
                     <TouchableOpacity
                       style={{
                         backgroundColor: state.sliderButton,
@@ -205,9 +268,24 @@ const App = () => {
                         borderRadius: 30 / 2,
                         marginLeft: 10,
                         marginTop: -12,
+                        zIndex: 10,
                       }}
-                      onPress={() => moodSelected(4)}
-                    />
+                      onPress={() => moodSelected(4)}>
+                      {activeCounter == 4 && (
+                        <View
+                          style={{
+                            backgroundColor: 'white',
+                            width: 40,
+                            height: 40,
+                            borderRadius: 40 / 2,
+                            marginLeft: -6,
+                            marginTop: -4,
+                            borderWidth: 4,
+                            borderColor: state.bottomStrip,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
                   </View>
                 </View>
               </LinearGradient>
@@ -284,6 +362,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  sliderButton1: {},
+  sliderButton2: {},
+  sliderButton3: {},
+  sliderButton4: {},
+  sliderButton5: {},
 });
 
 export default App;
