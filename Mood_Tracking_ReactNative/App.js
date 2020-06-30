@@ -73,6 +73,8 @@ const App = () => {
 
   const opacity = useState(new Animated.Value(1))[0];
   const transformAnimate = useState(new Animated.Value(1))[0];
+  const translateText = useState(new Animated.Value(0))[0];
+  const textOpacity = useState(new Animated.Value(1))[0];
 
   const [activeCounter, updateCounter] = useState(2);
 
@@ -84,6 +86,22 @@ const App = () => {
   const moodSelected = i => {
     updateCounter(i);
     updateState(data[i]);
+
+    textOpacity.setValue(0);
+    translateText.setValue(40);
+    Animated.timing(textOpacity, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.cubic,
+    }).start();
+
+    Animated.timing(translateText, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    }).start();
 
     opacity.setValue(0);
     Animated.timing(opacity, {
@@ -131,7 +149,7 @@ const App = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 marginRight: 16,
-                marginBottom:4
+                marginBottom: 4,
               }}>
               <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 16}}>
                 How're you feeling?
@@ -144,7 +162,8 @@ const App = () => {
                 }}
               />
             </View>
-            <Animated.View style={[styles.card, {transform: [{scale: transformAnimate}]}]}>
+            <Animated.View
+              style={[styles.card, {transform: [{scale: transformAnimate}]}]}>
               <LinearGradient
                 colors={state.moodBackground}
                 style={styles.linearGradient}>
@@ -321,7 +340,7 @@ const App = () => {
                   </View>
                 </View>
               </LinearGradient>
-              
+
               <View
                 style={{
                   backgroundColor: state.bottomStrip,
@@ -341,8 +360,19 @@ const App = () => {
                       color: 'white',
                     }}>
                     I'm feeling{' '}
-                    <Text style={{fontWeight: 'bold'}}>{state.moodSmall}</Text>
                   </Text>
+                  <Animated.Text
+                    style={{
+                      fontWeight: 'bold',
+                      marginLeft: -64,
+                      fontSize: 20,
+                      marginTop: 4,
+                      color: 'white',
+                      opacity: textOpacity,
+                      transform: [{translateY: translateText}],
+                    }}>
+                    {state.moodSmall}
+                  </Animated.Text>
                   <TouchableOpacity
                     style={{
                       color: 'white',
