@@ -83,9 +83,27 @@ const App = () => {
     outputRange: [200, 160],
   });
 
+  const imageScaling = useState(new Animated.Value(1))[0];
+
   const moodSelected = i => {
-    updateCounter(i);
-    updateState(data[i]);
+    Animated.timing(imageScaling, {
+      toValue: 1.22,
+      duration: 100,
+      useNativeDriver: true,
+      easing: Easing.cubic,
+    }).start(() => {
+      updateCounter(i);
+      updateState(data[i]);
+      Animated.timing(imageScaling, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+        easing: Easing.cubic,
+      }).start();
+    });
+
+    /* updateCounter(i);
+    updateState(data[i]); */
 
     textOpacity.setValue(0);
     translateText.setValue(40);
@@ -103,13 +121,28 @@ const App = () => {
       easing: Easing.linear,
     }).start();
 
-    opacity.setValue(0);
+    /* opacity.setValue(0);
     Animated.timing(opacity, {
       toValue: 1,
       duration: 400,
       useNativeDriver: false,
       easing: Easing.linear,
-    }).start();
+    }).start(); */
+
+    /* Animated.timing(imageScaling, {
+      toValue: 1.2,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    }).start(() => {
+      Animated.timing(imageScaling, {
+        toValue: 1,
+        duration: 400,
+        useNativeDriver: true,
+        easing: Easing.cubic,
+      }).start();
+    }); */
+
     scaleAnimation();
   };
 
@@ -182,9 +215,9 @@ const App = () => {
 
                 <Animated.Image
                   style={{
-                    opacity,
-                    width: size,
-                    height: size,
+                    transform: [{scale: imageScaling}],
+                    width: 160,
+                    height: 160,
                     marginBottom: 76,
                     marginTop: -44,
                   }}
