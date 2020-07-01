@@ -69,12 +69,18 @@ const App = () => {
     },
   ];
 
+  const profileURL =
+    'https://avatars1.githubusercontent.com/u/19240647?s=460&u=4149d5117d3c4fc2bfa3fe70c3d1525c2f9e2635&v=4';
+
   const [state, updateState] = useState(data[2]);
 
   const opacity = useState(new Animated.Value(1))[0];
   const transformAnimate = useState(new Animated.Value(1))[0];
   const translateText = useState(new Animated.Value(0))[0];
   const textOpacity = useState(new Animated.Value(1))[0];
+
+  const translateBigText = useState(new Animated.Value(0))[0];
+  const bigTextOpacity = useState(new Animated.Value(1))[0];
 
   const [activeCounter, updateCounter] = useState(2);
 
@@ -86,13 +92,14 @@ const App = () => {
   const imageScaling = useState(new Animated.Value(1))[0];
 
   const moodSelected = i => {
+    updateCounter(i);
+
     Animated.timing(imageScaling, {
       toValue: 1.22,
       duration: 100,
       useNativeDriver: true,
       easing: Easing.cubic,
     }).start(() => {
-      updateCounter(i);
       updateState(data[i]);
       Animated.timing(imageScaling, {
         toValue: 1,
@@ -105,6 +112,24 @@ const App = () => {
     /* updateCounter(i);
     updateState(data[i]); */
 
+    /* Animate Big text */
+    translateBigText.setValue(40);
+    bigTextOpacity.setValue(0);
+    Animated.timing(bigTextOpacity, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.cubic,
+    }).start();
+
+    Animated.timing(translateBigText, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    }).start();
+
+    /* Animate Small text */
     textOpacity.setValue(0);
     translateText.setValue(40);
     Animated.timing(textOpacity, {
@@ -189,10 +214,7 @@ const App = () => {
               </Text>
               <Image
                 style={{width: 50, height: 50, borderRadius: 50 / 2}}
-                source={{
-                  uri:
-                    'https://avatars1.githubusercontent.com/u/19240647?s=460&u=4149d5117d3c4fc2bfa3fe70c3d1525c2f9e2635&v=4',
-                }}
+                source={{uri: profileURL,}}
               />
             </View>
             <Animated.View
@@ -200,18 +222,24 @@ const App = () => {
               <LinearGradient
                 colors={state.moodBackground}
                 style={styles.linearGradient}>
-                <LinearTextGradient
+                <Animated.View
                   style={{
-                    fontSize: 86,
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                  }}
-                  locations={[0.37, 0.86]}
-                  colors={state.textColor}
-                  start={{x: 0.5, y: 0}}
-                  end={{x: 0.5, y: 1}}>
-                  <Text>{state.moodBig}</Text>
-                </LinearTextGradient>
+                    opacity: bigTextOpacity,
+                    transform: [{translateY: translateBigText}],
+                  }}>
+                  <LinearTextGradient
+                    style={{
+                      fontSize: 86,
+                      textAlign: 'center',
+                      fontWeight: 'bold',
+                    }}
+                    locations={[0.37, 0.86]}
+                    colors={state.textColor}
+                    start={{x: 0.5, y: 0}}
+                    end={{x: 0.5, y: 1}}>
+                    <Text>{state.moodBig}</Text>
+                  </LinearTextGradient>
+                </Animated.View>
 
                 <Animated.Image
                   style={{
