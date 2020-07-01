@@ -17,6 +17,7 @@
 ## Run the app
 For now it will only work on Android.
 ```
+$ cd Mood_Tracking_UI/Mood_Tracking_ReactNative/
 $ npm install
 $ npm start
 $ react-native run-android
