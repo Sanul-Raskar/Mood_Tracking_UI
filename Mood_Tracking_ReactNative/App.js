@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -82,6 +82,8 @@ const App = () => {
   const translateBigText = useState(new Animated.Value(0))[0];
   const bigTextOpacity = useState(new Animated.Value(1))[0];
 
+  const imageScaling = useState(new Animated.Value(1))[0];
+
   const [activeCounter, updateCounter] = useState(2);
 
   const size = opacity.interpolate({
@@ -89,30 +91,32 @@ const App = () => {
     outputRange: [200, 160],
   });
 
-  const imageScaling = useState(new Animated.Value(1))[0];
+  useEffect(() => {
+    moodSelected();
+  }, [activeCounter]);
 
-  const moodSelected = i => {
-    updateCounter(i);
+  const emojiScaleDown = () => {
+    Animated.timing(imageScaling, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+      easing: Easing.cubic,
+    }).start();
+  };
 
+  const emojiScaleUp = () => {
     Animated.timing(imageScaling, {
       toValue: 1.22,
       duration: 100,
       useNativeDriver: true,
       easing: Easing.cubic,
     }).start(() => {
-      updateState(data[i]);
-      Animated.timing(imageScaling, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-        easing: Easing.cubic,
-      }).start();
+      updateState(data[activeCounter]);
+      emojiScaleDown();
     });
+  };
 
-    /* updateCounter(i);
-    updateState(data[i]); */
-
-    /* Animate Big text */
+  const bigTextTranslateY = () => {
     translateBigText.setValue(40);
     bigTextOpacity.setValue(0);
     Animated.timing(bigTextOpacity, {
@@ -128,8 +132,9 @@ const App = () => {
       useNativeDriver: true,
       easing: Easing.linear,
     }).start();
+  };
 
-    /* Animate Small text */
+  const smallTextTranslateY = () => {
     textOpacity.setValue(0);
     translateText.setValue(40);
     Animated.timing(textOpacity, {
@@ -145,29 +150,12 @@ const App = () => {
       useNativeDriver: true,
       easing: Easing.linear,
     }).start();
+  };
 
-    /* opacity.setValue(0);
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 400,
-      useNativeDriver: false,
-      easing: Easing.linear,
-    }).start(); */
-
-    /* Animated.timing(imageScaling, {
-      toValue: 1.2,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.linear,
-    }).start(() => {
-      Animated.timing(imageScaling, {
-        toValue: 1,
-        duration: 400,
-        useNativeDriver: true,
-        easing: Easing.cubic,
-      }).start();
-    }); */
-
+  const moodSelected = () => {
+    emojiScaleUp();
+    bigTextTranslateY();
+    smallTextTranslateY();
     scaleAnimation();
   };
 
@@ -214,7 +202,7 @@ const App = () => {
               </Text>
               <Image
                 style={{width: 50, height: 50, borderRadius: 50 / 2}}
-                source={{uri: profileURL,}}
+                source={{uri: profileURL}}
               />
             </View>
             <Animated.View
@@ -278,7 +266,7 @@ const App = () => {
                         marginTop: -4,
                         zIndex: 10,
                       }}
-                      onPress={() => moodSelected(0)}>
+                      onPress={() => updateCounter(0)}>
                       {activeCounter == 0 && (
                         <View
                           style={{
@@ -304,7 +292,7 @@ const App = () => {
                         marginTop: -6,
                         zIndex: 10,
                       }}
-                      onPress={() => moodSelected(1)}>
+                      onPress={() => updateCounter(1)}>
                       {activeCounter == 1 && (
                         <View
                           style={{
@@ -330,7 +318,7 @@ const App = () => {
                         marginTop: -8,
                         zIndex: 10,
                       }}
-                      onPress={() => moodSelected(2)}>
+                      onPress={() => updateCounter(2)}>
                       {activeCounter == 2 && (
                         <View
                           style={{
@@ -356,7 +344,7 @@ const App = () => {
                         marginTop: -10,
                         zIndex: 10,
                       }}
-                      onPress={() => moodSelected(3)}>
+                      onPress={() => updateCounter(3)}>
                       {activeCounter == 3 && (
                         <View
                           style={{
@@ -382,7 +370,7 @@ const App = () => {
                         marginTop: -12,
                         zIndex: 10,
                       }}
-                      onPress={() => moodSelected(4)}>
+                      onPress={() => updateCounter(4)}>
                       {activeCounter == 4 && (
                         <View
                           style={{
