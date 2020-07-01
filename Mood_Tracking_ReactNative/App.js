@@ -181,15 +181,7 @@ const App = () => {
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={styles.body}>
-            <Text
-              style={{
-                fontSize: 22,
-                color: 'gray',
-                marginTop: 34,
-                marginLeft: 16,
-              }}>
-              Hey Sanul
-            </Text>
+            <Text style={styles.text1}>Hey Sanul</Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -197,13 +189,8 @@ const App = () => {
                 marginRight: 16,
                 marginBottom: 4,
               }}>
-              <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 16}}>
-                How're you feeling?
-              </Text>
-              <Image
-                style={{width: 50, height: 50, borderRadius: 50 / 2}}
-                source={{uri: profileURL}}
-              />
+              <Text style={styles.text2}>How're you feeling?</Text>
+              <Image style={styles.profileImg} source={{uri: profileURL}} />
             </View>
             <Animated.View
               style={[styles.card, {transform: [{scale: transformAnimate}]}]}>
@@ -230,26 +217,16 @@ const App = () => {
                 </Animated.View>
 
                 <Animated.Image
-                  style={{
-                    transform: [{scale: imageScaling}],
-                    width: 160,
-                    height: 160,
-                    marginBottom: 76,
-                    marginTop: -44,
-                  }}
+                  style={[
+                    styles.emojiImg,
+                    {
+                      transform: [{scale: imageScaling}],
+                    },
+                  ]}
                   source={state.moodEmoji}
                 />
 
-                <View
-                  style={{
-                    width: '90%',
-                    height: 4,
-                    backgroundColor: 'rgba(242, 242, 242,0.7)',
-                    marginVertical: 14,
-                    borderRadius: 20,
-                    position: 'absolute',
-                    bottom: 30,
-                  }}>
+                <View style={styles.sliderBar}>
                   <View
                     style={{
                       flex: 1,
@@ -257,132 +234,93 @@ const App = () => {
                       justifyContent: 'space-between',
                     }}>
                     <TouchableOpacity
-                      style={{
-                        backgroundColor: state.sliderButton,
-                        width: 14,
-                        height: 14,
-                        borderRadius: 14 / 2,
-                        marginLeft: 0,
-                        marginTop: -4,
-                        zIndex: 10,
-                      }}
+                      style={[
+                        styles.sliderButton0Passive,
+                        {backgroundColor: state.sliderButton},
+                      ]}
                       onPress={() => updateCounter(0)}>
                       {activeCounter == 0 && (
                         <View
-                          style={{
-                            backgroundColor: 'white',
-                            width: 40,
-                            height: 40,
-                            borderRadius: 40 / 2,
-                            marginLeft: -12,
-                            marginTop: -14,
-                            borderWidth: 4,
-                            borderColor: state.bottomStrip,
-                          }}
+                          style={[
+                            styles.sliderButton0Active,
+                            {borderColor: state.bottomStrip},
+                          ]}
                         />
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={{
-                        backgroundColor: state.sliderButton,
-                        width: 18,
-                        height: 18,
-                        borderRadius: 18 / 2,
-                        marginLeft: 10,
-                        marginTop: -6,
-                        zIndex: 10,
-                      }}
+                      style={[
+                        styles.sliderButton1Passive,
+                        {
+                          backgroundColor: state.sliderButton,
+                        },
+                      ]}
                       onPress={() => updateCounter(1)}>
                       {activeCounter == 1 && (
                         <View
-                          style={{
-                            backgroundColor: 'white',
-                            width: 40,
-                            height: 40,
-                            borderRadius: 40 / 2,
-                            marginLeft: -10,
-                            marginTop: -10,
-                            borderWidth: 4,
-                            borderColor: state.bottomStrip,
-                          }}
+                          style={[
+                            styles.sliderButton1Active,
+                            {
+                              borderColor: state.bottomStrip,
+                            },
+                          ]}
                         />
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={{
-                        backgroundColor: state.sliderButton,
-                        width: 22,
-                        height: 22,
-                        borderRadius: 22 / 2,
-                        marginLeft: 10,
-                        marginTop: -8,
-                        zIndex: 10,
-                      }}
+                      style={[
+                        styles.sliderButton2Passive,
+                        {
+                          backgroundColor: state.sliderButton,
+                        },
+                      ]}
                       onPress={() => updateCounter(2)}>
                       {activeCounter == 2 && (
                         <View
-                          style={{
-                            backgroundColor: 'white',
-                            width: 40,
-                            height: 40,
-                            borderRadius: 40 / 2,
-                            marginLeft: -8,
-                            marginTop: -8,
-                            borderWidth: 4,
-                            borderColor: state.bottomStrip,
-                          }}
+                          style={[
+                            styles.sliderButton2Active,
+                            {
+                              borderColor: state.bottomStrip,
+                            },
+                          ]}
                         />
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={{
-                        backgroundColor: state.sliderButton,
-                        width: 26,
-                        height: 26,
-                        borderRadius: 26 / 2,
-                        marginLeft: 10,
-                        marginTop: -10,
-                        zIndex: 10,
-                      }}
+                      style={[
+                        styles.sliderButton3Passive,
+                        {
+                          backgroundColor: state.sliderButton,
+                        },
+                      ]}
                       onPress={() => updateCounter(3)}>
                       {activeCounter == 3 && (
                         <View
-                          style={{
-                            backgroundColor: 'white',
-                            width: 40,
-                            height: 40,
-                            borderRadius: 40 / 2,
-                            marginLeft: -8,
-                            marginTop: -7,
-                            borderWidth: 4,
-                            borderColor: state.bottomStrip,
-                          }}
+                          style={[
+                            styles.sliderButton3Active,
+                            {
+                              borderColor: state.bottomStrip,
+                            },
+                          ]}
                         />
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={{
-                        backgroundColor: state.sliderButton,
-                        width: 30,
-                        height: 30,
-                        borderRadius: 30 / 2,
-                        marginLeft: 10,
-                        marginTop: -12,
-                        zIndex: 10,
-                      }}
+                      style={[
+                        styles.sliderButton4Passive,
+                        {
+                          backgroundColor: state.sliderButton,
+                        },
+                      ]}
                       onPress={() => updateCounter(4)}>
                       {activeCounter == 4 && (
                         <View
-                          style={{
-                            backgroundColor: 'white',
-                            width: 40,
-                            height: 40,
-                            borderRadius: 40 / 2,
-                            marginLeft: -6,
-                            marginTop: -4,
-                            borderWidth: 4,
-                            borderColor: state.bottomStrip,
-                          }}
+                          style={[
+                            styles.sliderButton4Active,
+                            {
+                              borderColor: state.bottomStrip,
+                            },
+                          ]}
                         />
                       )}
                     </TouchableOpacity>
@@ -401,47 +339,26 @@ const App = () => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
-                  <Text
-                    style={{
-                      marginLeft: 26,
-                      fontSize: 20,
-                      marginTop: 4,
-                      color: 'white',
-                    }}>
-                    I'm feeling{' '}
-                  </Text>
+                  <Text style={styles.text3}>I'm feeling </Text>
                   <Animated.Text
-                    style={{
-                      fontWeight: 'bold',
-                      marginLeft: -64,
-                      fontSize: 20,
-                      marginTop: 4,
-                      color: 'white',
-                      opacity: textOpacity,
-                      transform: [{translateY: translateText}],
-                    }}>
+                    style={[
+                      styles.smallMoodText,
+                      {
+                        opacity: textOpacity,
+                        transform: [{translateY: translateText}],
+                      },
+                    ]}>
                     {state.moodSmall}
                   </Animated.Text>
                   <TouchableOpacity
-                    style={{
-                      color: 'white',
-                      fontWeight: 'bold',
-                      backgroundColor: state.saveButton,
-                      width: 66,
-                      marginRight: 26,
-                      paddingVertical: 8,
-                      borderRadius: 12,
-                    }}
+                    style={[
+                      styles.savebutton,
+                      {
+                        backgroundColor: state.saveButton,
+                      },
+                    ]}
                     onPress={() => scaleAnimation()}>
-                    <Text
-                      style={{
-                        textAlign: 'center',
-                        fontSize: 18,
-                        fontWeight: 'bold',
-                        color: 'white',
-                      }}>
-                      SAVE
-                    </Text>
+                    <Text style={styles.saveButtonText}>SAVE</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -467,6 +384,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     overflow: 'hidden',
   },
+
+  text1: {
+    fontSize: 22,
+    color: 'gray',
+    marginTop: 34,
+    marginLeft: 16,
+  },
+  text2: {fontSize: 28, fontWeight: 'bold', marginLeft: 16},
+  text3: {
+    marginLeft: 26,
+    fontSize: 20,
+    marginTop: 4,
+    color: 'white',
+  },
+  profileImg: {width: 50, height: 50, borderRadius: 50 / 2},
   linearGradient: {
     flex: 1,
     paddingLeft: 15,
@@ -474,6 +406,124 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emojiImg: {width: 160, height: 160, marginBottom: 76, marginTop: -44},
+  sliderBar: {
+    width: '90%',
+    height: 4,
+    backgroundColor: 'rgba(242, 242, 242,0.7)',
+    marginVertical: 14,
+    borderRadius: 20,
+    position: 'absolute',
+    bottom: 30,
+  },
+  sliderButton0Passive: {
+    width: 14,
+    height: 14,
+    borderRadius: 14 / 2,
+    marginLeft: 0,
+    marginTop: -4,
+    zIndex: 10,
+  },
+  sliderButton0Active: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    marginLeft: -12,
+    marginTop: -14,
+    borderWidth: 4,
+  },
+  sliderButton1Passive: {
+    width: 18,
+    height: 18,
+    borderRadius: 18 / 2,
+    marginLeft: 10,
+    marginTop: -6,
+    zIndex: 10,
+  },
+  sliderButton1Active: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    marginLeft: -10,
+    marginTop: -10,
+    borderWidth: 4,
+  },
+  sliderButton2Passive: {
+    width: 22,
+    height: 22,
+    borderRadius: 22 / 2,
+    marginLeft: 10,
+    marginTop: -8,
+    zIndex: 10,
+  },
+  sliderButton2Active: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    marginLeft: -8,
+    marginTop: -8,
+    borderWidth: 4,
+  },
+  sliderButton3Passive: {
+    width: 26,
+    height: 26,
+    borderRadius: 26 / 2,
+    marginLeft: 10,
+    marginTop: -10,
+    zIndex: 10,
+  },
+  sliderButton3Active: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    marginLeft: -8,
+    marginTop: -7,
+    borderWidth: 4,
+  },
+  sliderButton4Passive: {
+    width: 30,
+    height: 30,
+    borderRadius: 30 / 2,
+    marginLeft: 10,
+    marginTop: -12,
+    zIndex: 10,
+  },
+  sliderButton4Active: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    marginLeft: -6,
+    marginTop: -4,
+    borderWidth: 4,
+  },
+
+  smallMoodText: {
+    fontWeight: 'bold',
+    marginLeft: -64,
+    fontSize: 20,
+    marginTop: 4,
+    color: 'white',
+  },
+
+  savebutton: {
+    color: 'white',
+    fontWeight: 'bold',
+    width: 66,
+    marginRight: 26,
+    paddingVertical: 8,
+    borderRadius: 12,
+  },
+  saveButtonText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 
