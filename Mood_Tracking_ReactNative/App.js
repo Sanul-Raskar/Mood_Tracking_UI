@@ -119,44 +119,50 @@ const App = () => {
   const bigTextTranslateY = () => {
     translateBigText.setValue(40);
     bigTextOpacity.setValue(0);
-    Animated.timing(bigTextOpacity, {
-      toValue: 1,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.cubic,
-    }).start();
 
-    Animated.timing(translateBigText, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.linear,
-    }).start();
+    Animated.parallel([
+      Animated.timing(bigTextOpacity, {
+        toValue: 1,
+        duration: 400,
+        useNativeDriver: true,
+        easing: Easing.cubic,
+      }).start(),
+      Animated.timing(translateBigText, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: true,
+        easing: Easing.linear,
+      }).start(),
+    ]).start();
   };
 
   const smallTextTranslateY = () => {
     textOpacity.setValue(0);
     translateText.setValue(40);
-    Animated.timing(textOpacity, {
-      toValue: 1,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.cubic,
-    }).start();
 
-    Animated.timing(translateText, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.linear,
-    }).start();
+    Animated.parallel([
+      Animated.timing(textOpacity, {
+        toValue: 1,
+        duration: 400,
+        useNativeDriver: true,
+        easing: Easing.cubic,
+      }).start(),
+      Animated.timing(translateText, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: true,
+        easing: Easing.linear,
+      }).start(),
+    ]).start();
   };
 
   const moodSelected = () => {
     emojiScaleUp();
-    bigTextTranslateY();
-    smallTextTranslateY();
-    scaleAnimation();
+    Animated.parallel([
+      bigTextTranslateY(),
+      smallTextTranslateY(),
+      scaleAnimation(),
+    ]).start();
   };
 
   const scaleAnimation = () => {
