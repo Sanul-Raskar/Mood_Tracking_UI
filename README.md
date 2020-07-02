@@ -26,4 +26,5 @@ $ react-native run-android
 ## Design Credits
 Saptarshi Prakash
 Instagram Profile: [@saptarshiux](https://instagram.com/saptarshiux?igshid=1bx0v75j6fjih)
+
 [View design post here](https://www.instagram.com/p/B8ZNF4VjMv9/?igshid=1dya3zxr8wk0n)
