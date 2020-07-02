@@ -15,7 +15,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {LinearTextGradient} from 'react-native-text-gradient';
 
-const App = () => {
+const MoodTracker = () => {
   const data = [
     {
       moodSmall: 'awful',
@@ -531,4 +531,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default MoodTracker;
