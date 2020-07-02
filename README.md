@@ -7,11 +7,11 @@
 
 ### Output Images
 <p float="left">
-  <img style="padding:4px" src="/output/awful_output.png" width="200" />
-  <img style="padding:4px" src="/output/bad_output.png" width="200" /> 
-  <img style="padding:4px" src="/output/okay_output.png" width="200" />
-  <img style="padding:4px" src="/output/good_output.png" width="200" />
-  <img style="padding:4px" src="/output/great_output.png" width="200" />
+  <img style="padding:4px" src="/output/awful_output.png" width="260" />
+  <img style="padding:4px" src="/output/bad_output.png" width="260" /> 
+  <img style="padding:4px" src="/output/okay_output.png" width="260" />
+  <img style="padding:4px" src="/output/good_output.png" width="260" />
+  <img style="padding:4px" src="/output/great_output.png" width="260" />
 </p>
 
 ## Run the app
